@@ -1,0 +1,16 @@
+server:
+  port: 8091
+
+
+spring:
+  application:
+  name: SpringDataJPA
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://xxx:3306/jpa?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: xxx
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
