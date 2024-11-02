@@ -29,6 +29,8 @@ public interface UserService {
      * 根据roleId查所有的权限信息。
      */
     List<String> getPermissionsByRoleId(Long roleId);
+
+    List<String> getPermissionsByUsername(String username);
 }
 
 

@@ -45,4 +45,13 @@ public class UserServiceImpl implements UserService {
         return collect;
     }
 
+    /**
+     * @param username
+     * @return
+     */
+    @Override
+    public List<String> getPermissionsByUsername(String username) {
+        return List.of();
+    }
+
 }
