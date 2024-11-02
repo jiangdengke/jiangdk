@@ -4,6 +4,12 @@ import com.jiang.pojo.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+/**
+ * @author: JiangDk
+ * @date: 2024/10/6 21:36
+ * @description: 用户相关的API
+ */
 @Service
 public interface UserService {
     /**

@@ -12,4 +12,51 @@
     <!--@mbg.generated-->
     id, code, `name`
   </sql>
+
+  <insert id="insert">
+    INSERT INTO role (code, name) VALUES (#{code}, #{name});
+    </insert>
+
+
+  <select id="findRoleByCode" resultMap="BaseResultMap">
+    select * from role where code = #{code}
+  </select>
+
+  <select id="findRoleByName" resultMap="BaseResultMap">
+    select * from role where code = #{name}
+  </select>
+
+  <delete id="deleteRoleByCode">
+    delete from role where code=#{code}
+  </delete>
+  <update id="updateRole">
+    update role
+    <set>
+      <if test="code != null and code != ''">
+        code = #{code},
+      </if>
+      <if test="name != null and name != ''">
+        name = #{name},
+      </if>
+    </set>
+    where id=#{id}
+  </update>
+
+  <select id="findRoleById" resultMap="BaseResultMap">
+    select * from role where id = #{id}
+  </select>
+
+  <select id="findRoleByCodeORName" resultMap="BaseResultMap">
+    SELECT * FROM role
+    <where>
+      <choose>
+        <when test="code != null and code != ''">
+          AND code = #{code}
+        </when>
+        <when test="name != null and name != ''">
+          AND name = #{name}
+        </when>
+      </choose>
+    </where>
+  </select>
 </mapper>

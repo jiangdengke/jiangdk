@@ -1,10 +1,7 @@
 package com.jiang.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jiang.pojo.vo.resp.ResponseCode;
-import com.jiang.pojo.vo.resp.Result;
 import com.jiang.security.utils.JwtTokenUtil;
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,14 +38,19 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
         //检查是否合法
-        Claims claims = JwtTokenUtil.checkJWT(tokenStr);
-        if (claims==null) {
-            //票据不合法，过滤器终止。
-            Result error = Result.error("401",ResponseCode.UNAUTHORIZED_Token.toString());
-//            R error = R.error(ResponseCode.INVALID_TOKEN);
-            response.getWriter().write(new ObjectMapper().writeValueAsString(error));
+        String check = JwtTokenUtil.checkJWT(tokenStr);
+//        if (claims==null) {
+//            //票据不合法，过滤器终止。
+//            Result error = Result.error("401",ResponseCode.UNAUTHORIZED_Token.toString());
+////            R error = R.error(ResponseCode.INVALID_TOKEN);
+//            response.getWriter().write(new ObjectMapper().writeValueAsString(error));
+//            return;
+//        }
+        if (!check.equals("token验证通过")){
+            response.getWriter().write(new ObjectMapper().writeValueAsString(check));
             return;
         }
+
         String username = JwtTokenUtil.getUsername(tokenStr);
         String roles = JwtTokenUtil.getUserRole(tokenStr);
         String strip = StringUtils.strip(roles, "[]");

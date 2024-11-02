@@ -38,10 +38,12 @@ public class loginUserDetailService implements UserDetailsService {
         List<String> uniquePermissions = permissionNames.stream()
                 .distinct()
                 .collect(Collectors.toList());
+        System.out.println(uniquePermissions.toString());
         // 拿到以逗号分隔的权限列表
         String userRoleString = uniquePermissions.stream()
                 .collect(Collectors.joining(","));
         List<GrantedAuthority> list = AuthorityUtils.commaSeparatedStringToAuthorityList(userRoleString);
+        System.out.println(list);
         LoginUserDetail loginUserDetail = new LoginUserDetail();
         BeanUtils.copyProperties(user,loginUserDetail);// 把查到的对象属性都赋给UserDetails
         loginUserDetail.setPassword("{noop}"+user.getPassword());

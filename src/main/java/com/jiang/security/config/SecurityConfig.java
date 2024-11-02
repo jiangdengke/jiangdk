@@ -41,7 +41,6 @@ public class SecurityConfig {
                         registry ->
                                 registry
                                         //放行的请求
-                                        .requestMatchers(getPubPath()).permitAll()
                                         .anyRequest()
                                         .authenticated() //除了上述资源外，其它资源，只有 认证通过后，才能有权访问
                 )
